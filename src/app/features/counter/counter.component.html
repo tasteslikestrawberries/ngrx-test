@@ -1,0 +1,15 @@
+<h2>Counter</h2>
+
+<button class="btn-primary" (click)="increment()" type="button">
+  Increment
+</button>
+
+<div>Current Count: {{ count$ | async }}</div>
+
+<button class="btn-primary" (click)="decrement()" type="button">
+  Decrement
+</button>
+
+<button class="btn-secondary" (click)="reset()" type="button">
+  Reset Counter
+</button>

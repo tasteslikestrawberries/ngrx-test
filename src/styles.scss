@@ -1,1 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+button {
+    margin: 1rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &.btn-primary {
+        background-color: rgb(255, 122, 145);
+        border: 1px solid rgb(255, 122, 145);
+        color: #fff;
+    }
+
+    &.btn-secondary {
+        margin: 1rem;
+        background-color: rgb(255, 230, 234);
+        border: 1px solid rgb(255, 122, 145);
+        color: rgb(255, 122, 145);
+    }
+
+    &.btn-danger {
+        margin: 1rem;
+        background-color: rgb(233, 8, 8);
+        border: 1px solid rgb(233, 8, 8);
+        color: #fff;
+    }
+}
+
+h1 {
+    color: rgb(235, 60, 86);
+}
+
+h2 {
+    color: rgb(240, 127, 144);
+}
+
+h3 {
+    color: rgb(243, 152, 165);
+}
+
+input {
+    padding: 0.5rem;
+    border-radius: 3px;
+}
+
+@media(width >=900px) {
+    h1 {
+        margin: 2rem auto;
+    }
+}

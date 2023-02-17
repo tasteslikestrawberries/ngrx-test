@@ -1,0 +1,12 @@
+<h3>Books</h3>
+<app-book-list
+  [books]="(books$ | async)!"
+  (add)="onAdd($event)"
+></app-book-list>
+
+<h3>Books Collection</h3>
+<app-book-collection
+  [books]="(bookCollection$ | async)!"
+  (remove)="onRemove($event)"
+>
+</app-book-collection>

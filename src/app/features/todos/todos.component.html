@@ -1,0 +1,21 @@
+<h2>Todo List</h2>
+
+<input [(ngModel)]="todo" type="text" />
+<button class="btn-primary" type="button" (click)="onAddTodo()">
+  Add Todo
+</button>
+
+<ul *ngIf="(todos$ | async)?.length; else noData">
+  <li *ngFor="let todo of todos$ | async">
+    <p>
+      <span>{{ todo.content }}</span>
+      <button class="btn-danger" type="button" (click)="onRemoveTodo(todo.id)">
+        Remove Todo
+      </button>
+    </p>
+  </li>
+</ul>
+
+<ng-template #noData>
+  <div>No data available</div>
+</ng-template>
