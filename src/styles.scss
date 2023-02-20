@@ -1,6 +1,7 @@
 html,
 body {
     font-family: 'Roboto', sans-serif;
+    margin: 0 1rem;
 }
 
 p {
@@ -14,6 +15,8 @@ button {
     padding: 0.5rem;
     font-weight: 700;
     border-radius: 3px;
+    width: 120px;
+    height: 33px;
     cursor: pointer;
 
     &.btn-primary {
@@ -35,6 +38,15 @@ button {
         border: 1px solid rgb(233, 8, 8);
         color: #fff;
     }
+
+    &.btn-small {
+        width: 34px;
+        height: 33px;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 h1 {
@@ -52,10 +64,33 @@ h3 {
 input {
     padding: 0.5rem;
     border-radius: 3px;
+
+    &:read-only {
+        border: none;
+        outline: none;
+    }
+}
+
+table {
+    border-collapse: collapse;
+
+    & th,
+    td {
+        border: 1px solid rgb(243, 152, 165);
+        padding: 0.5rem;
+    }
+}
+
+thead {
+    background-color: rgb(240, 127, 144);
 }
 
 @media(width >=900px) {
     h1 {
         margin: 2rem auto;
+    }
+
+    input {
+        width: 250px;
     }
 }

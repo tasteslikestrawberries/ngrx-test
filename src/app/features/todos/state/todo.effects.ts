@@ -9,6 +9,7 @@ import {
   loadTodosFailure,
   loadTodosSuccess,
   removeTodo,
+  updateTodo,
 } from './todo.reducer';
 import { selectTodos } from './todo.selectors';
 @Injectable()
@@ -38,6 +39,21 @@ export class TodoEffects {
         ofType(addTodo, removeTodo),
         withLatestFrom(this.store.select(selectTodos)),
         tap(([action, todos]) => this.todoService.setTodos([...todos]))
+      ),
+    { dispatch: false }
+  );
+
+  updateTodos$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateTodo),
+        withLatestFrom(this.store.select(selectTodos)),
+        tap(([action, todos]) => {
+          return this.todoService.updateTodo({
+            id: action.todoId,
+            content: action.content,
+          });
+        })
       ),
     { dispatch: false }
   );

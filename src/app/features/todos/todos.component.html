@@ -1,21 +1,65 @@
 <h2>Todo List</h2>
 
-<input [(ngModel)]="todo" type="text" />
-<button class="btn-primary" type="button" (click)="onAddTodo()">
+<input
+  placeholder="Enter todo (3 characters minimum)"
+  [(ngModel)]="todo"
+  (keyup.enter)="onAddTodo()"
+  type="text"
+/>
+<button
+  [disabled]="todo && todo.length < 3"
+  class="btn-primary"
+  type="button"
+  (click)="onAddTodo()"
+>
   Add Todo
 </button>
 
-<ul *ngIf="(todos$ | async)?.length; else noData">
-  <li *ngFor="let todo of todos$ | async">
-    <p>
-      <span>{{ todo.content }}</span>
+<table *ngIf="(todos$ | async)?.length; else noData">
+  <thead>
+    <th>#</th>
+    <th>Id</th>
+    <th>Todo</th>
+    <th>Actions</th>
+  </thead>
+  <tr *ngFor="let todo of todos$ | async; let idx = index">
+    <td>{{ idx + 1 }}</td>
+    <td>{{ todo.id }}</td>
+    <td>
+      <input
+        [readOnly]="todo.id !== editingTodoId"
+        type="text"
+        [value]="todo.content"
+        (change)="onInputChange($event, todo.id)"
+      />
+    </td>
+    <td>
+      <button
+        *ngIf="todo.id !== editingTodoId"
+        class="btn-secondary"
+        type="button"
+        (click)="onEditTodo(todo.id)"
+      >
+        Edit Todo
+      </button>
+
+      <button
+        *ngIf="todo.id === editingTodoId"
+        class="btn-primary"
+        type="button"
+        (click)="onUpdateTodo(todo.id)"
+      >
+        Update Todo
+      </button>
+
       <button class="btn-danger" type="button" (click)="onRemoveTodo(todo.id)">
         Remove Todo
       </button>
-    </p>
-  </li>
-</ul>
+    </td>
+  </tr>
+  <tr></tr>
+</table>
 
 <ng-template #noData>
-  <div>No data available</div>
+  <p>No data available.</p>
 </ng-template>

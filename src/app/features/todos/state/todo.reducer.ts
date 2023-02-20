@@ -14,7 +14,7 @@ export const initialState: ITodoState = {
   status: 'pending',
 };
 
-export const { addTodo, removeTodo } = TodoActions;
+export const { addTodo, updateTodo, removeTodo } = TodoActions;
 export const { loadTodos, loadTodosSuccess, loadTodosFailure } = TodoApiActions;
 
 export const todoReducer = createReducer(
@@ -24,22 +24,34 @@ export const todoReducer = createReducer(
   that takes the existing(current) state and payload(data) and returns the new state. 
   Instead of modifying existing state, with spread we are returning a new state object
    to which we add the new todo property*/
-  on(addTodo, (state, { content }) => ({
+  on(addTodo, (state, { id, content }) => ({
     ...state,
-    todos: [...state.todos, { id: Date.now().toString(), content: content }],
+    todos: [...state.todos, { id, content }],
   })),
+
+  on(updateTodo, (state, { todoId, content }) => {
+    return {
+      ...state,
+      todos: state.todos.map((todo) =>
+        todo.id === todoId ? { ...todo, content } : todo
+      ),
+    };
+  }),
 
   on(removeTodo, (state, { todoId }) => ({
     ...state,
     todos: state.todos.filter((todo) => todo.id !== todoId),
   })),
+
   on(loadTodos, (state) => ({ ...state, status: 'loading' })),
+
   on(loadTodosSuccess, (state, { todos }) => ({
     ...state,
     // create a new mutable array from the readonly array
     todos: [...todos],
     status: 'success',
   })),
+
   on(loadTodosFailure, (state, { error }) => ({
     ...state,
     error,

@@ -19,4 +19,15 @@ export class TodoService {
     localStorage.setItem('todos', JSON.stringify(todos));
     return of(todos);
   }
+
+  updateTodo(todo: ITodo) {
+    const storedTodos = JSON.parse(localStorage.getItem('todos')!);
+
+    const todoIdx = storedTodos.findIndex((t: ITodo) => t.id === todo.id);
+    if (todoIdx >= 0) {
+      storedTodos[todoIdx] = todo;
+      localStorage.setItem('todos', JSON.stringify(storedTodos));
+    }
+    return of(storedTodos);
+  }
 }

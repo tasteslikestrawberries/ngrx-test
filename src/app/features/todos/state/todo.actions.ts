@@ -5,7 +5,8 @@ export const TodoActions = createActionGroup({
   source: 'Todos',
   events: {
     //name of event: payload(data)
-    'Add Todo': props<{ content: string }>(),
+    'Add Todo': props<{ id: string; content: string }>(),
+    'Update Todo': props<{ todoId: string; content: string }>(),
     'Remove Todo': props<{ todoId: string }>(),
   },
 });
@@ -15,7 +16,7 @@ export const TodoApiActions = createActionGroup({
   events: {
     // defining an event without payload using the emptyProps function
     'Load Todos': emptyProps(),
-    'Load Todos Success': props<{ todos: ITodo[]}>(),
+    'Load Todos Success': props<{ todos: ITodo[] }>(),
     'Load Todos Failure': props<{ error: string }>(),
   },
 });
