@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  selectBookCollection,
-  selectBooks,
-} from 'src/app/features/books/state/books.selectors';
+import { selectBooks, selectBookCollection } from '../../state/books.selectors';
 import { BooksActions, BooksApiActions } from '../../state/books.actions';
 import { BooksService } from 'src/app/features/books/services/books.service';
 
